@@ -6,22 +6,19 @@
 #SBATCH --ntasks=1   # number of processor cores (i.e. tasks)
 #SBATCH --nodes=1   # number of nodes
 #SBATCH --cpus-per-task=1	# number of processors per task
-#SBATCH -J "rse"   # job name
+#SBATCH -J "rplhighpass-sort"   # job name
 
 ## /SBATCH -p general # partition (queue)
-#SBATCH -o rse-slurm.%N.%j.out # STDOUT
-#SBATCH -e rse-slurm.%N.%j.err # STDERR
+#SBATCH -o rplhighpass-sort-slurm.%N.%j.out # STDOUT
+#SBATCH -e rplhighpass-sort-slurm.%N.%j.err # STDERR
 
 # LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
 python -u -c "import PyHipp as pyh; \
 import time; \
-import os; \
-t0 = time.time(); \
-print(time.localtime()); \
-os.chdir('sessioneye'); \
-pyh.RPLSplit(SkipLFP=False, SkipHighPass=False); \
-print(time.localtime()); \
-print(time.time()-t0);"
+pyh.RPLHighPass(saveLevel=1); \
+from PyHipp import mountain_batch; \
+mountain_batch.mountain_batch(); \
+from PyHipp import export_mountain_cells; \
+export_mountain_cells.export_mountain_cells(); \
+print(time.localtime());"
 
-
-aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:705339871746:awsnotify --message "RPE JobDone"
