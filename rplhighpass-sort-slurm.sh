@@ -5,6 +5,10 @@
 #SBATCH --time=24:00:00   # walltime
 #SBATCH --ntasks=1   # number of processor cores (i.e. tasks)
 #SBATCH --nodes=1   # number of nodes
+<<<<<<< HEAD
+=======
+#SBATCH --cpus-per-task=1	# number of processors per task
+>>>>>>> c0907a02c9518110ea62a36bb294529967ffebd5
 #SBATCH -J "rplhighpass-sort"   # job name
 
 ## /SBATCH -p general # partition (queue)
