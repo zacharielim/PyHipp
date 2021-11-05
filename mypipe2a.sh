@@ -1,21 +1,14 @@
 #!/bin/bash
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> upstream/main
 # first job called from the day directory
 # creates RPLParallel, Unity, and EDFSplit objects, and
 # calls aligning_objects and raycast
 sbatch /data/src/PyHipp/rplparallel-slurm.sh
 
-<<<<<<< HEAD
 =======
 >>>>>>> c0907a02c9518110ea62a36bb294529967ffebd5
 # second job - no dependencies, called from the day directory
-=======
-# second set of jobs called from the day directory
->>>>>>> upstream/main
 jid2=$(sbatch /data/src/PyHipp/rse-slurm.sh)
 
 # third set of jobs - depends on rse-slurm.sh, called from the day directory
@@ -25,12 +18,6 @@ jid5=$(sbatch --dependency=afterok:${jid2##* } /data/src/PyHipp/rs3a-slurm.sh)
 jid6=$(sbatch --dependency=afterok:${jid2##* } /data/src/PyHipp/rs4a-slurm.sh)
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 
 >>>>>>> c0907a02c9518110ea62a36bb294529967ffebd5
-=======
-# put dependency for any job that will spawn more jobs here
-# sbatch --dependency=afterok:${jid3##* }:${jid4##* }:${jid5##* }:${jid6##* } /data/src/PyHipp/consol_jobs.sh
-
->>>>>>> upstream/main
